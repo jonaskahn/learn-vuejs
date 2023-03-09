@@ -11,6 +11,11 @@ const upvoteApp = {
                 return b.votes - a.votes
             })
         }
+    },
+    methods: {
+        upvote(id) {
+            alert(`You vote for item ${id}`)
+        }
     }
 };
 
