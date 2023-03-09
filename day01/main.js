@@ -8,13 +8,15 @@ const upvoteApp = {
     computed: {
         sortedSubmissions() {
             return this.submissions.sort((a, b) => {
-                return b.votes - a.votes
+                return a.votes - b.votes
             })
         }
     },
     methods: {
         upvote(id) {
             alert(`You vote for item ${id}`)
+            // Write your code to increase data here
+            // The answer for ref: https://jsfiddle.net/6f749xv8/
         }
     }
 };
