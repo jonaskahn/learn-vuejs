@@ -1,7 +1,8 @@
 const upvoteApp = {
     data() {
         return {
-            appTitle: "Hello Voter"
+            appTitle: "Hello Voter",
+            submissions: Seed.submissions,
         }
     }
 };
