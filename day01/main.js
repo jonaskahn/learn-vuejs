@@ -13,10 +13,12 @@ const upvoteApp = {
         }
     },
     methods: {
-        upvote(id) {
-            alert(`You vote for item ${id}`)
-            // Write your code to increase data here
-            // The answer for ref: https://jsfiddle.net/6f749xv8/
+        upvote(submissionId) {
+            alert(`You vote for item ${submissionId}`)
+            const submission = this.submissions.find(
+                (submission) => submission.id === submissionId
+            );
+            submission.votes++;
         }
     }
 };
