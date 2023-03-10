@@ -1,10 +1,17 @@
 const firstComponent = {
-    template: ` <div>Hello My Friend, {{ magicName }} </div>`,
+    template: `
+        <input class="input is-medium" type="text" placeholder="Medium input" v-model="magicName"/>
+        <div>Hello My Friend, {{ magicName }} </div>
+    
+    `,
     data() {
         return {
             magicName: "Tom",
         };
     },
+    computed() {
+        // Question reverse magicName in html display ?
+    }
 };
 const upvoteApp = {
     data() {
@@ -30,7 +37,6 @@ const upvoteApp = {
         }
     },
     components: {
-        firstComponent,
         "my-component": firstComponent,
     },
 };
