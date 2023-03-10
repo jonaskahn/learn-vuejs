@@ -1,3 +1,11 @@
+const firstComponent = {
+    template: ` <div>Hello My Friend, {{ magicName }} </div>`,
+    data() {
+        return {
+            magicName: "Tom",
+        };
+    },
+};
 const upvoteApp = {
     data() {
         return {
@@ -20,7 +28,11 @@ const upvoteApp = {
             );
             submission.votes++;
         }
-    }
+    },
+    components: {
+        firstComponent,
+        "my-component": firstComponent,
+    },
 };
 
 Vue.createApp(upvoteApp).mount('#app');
