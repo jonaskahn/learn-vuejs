@@ -1,23 +1,13 @@
 const firstComponent = {
-    template: `
-        <input class="input is-medium" type="text" placeholder="Medium input" v-model="magicName"/>
-        <div>Hello My Friend, {{ magicName }} </div>
-    
-    `,
-    data() {
-        return {
-            magicName: "Tom",
-        };
-    },
-    computed() {
-        // Question reverse magicName in html display ?
-    }
+    template: `<div>Hello My Friend, {{ name }} </div>`,
+    props: ['name']
 };
 const upvoteApp = {
     data() {
         return {
             appTitle: "Hello Voter",
             submissions: Seed.submissions,
+            parentName: null,
         }
     },
     computed: {
