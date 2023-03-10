@@ -15,6 +15,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/multi-word-component-names': 'off',
     'vue/no-reserved-component-names': 'off',
+    'no-unused-vars': 'warn',
     'vue/component-tags-order': [
       'warn',
       {

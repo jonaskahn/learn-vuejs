@@ -1,8 +1,11 @@
 <template>
-  <input class="input is-medium" type="text" v-model="inputData" @keyup.enter="addNote"/>
+  <input class="input is-medium" type="text" v-model="inputData" @keyup.enter="pushNote"/>
 </template>
 
 <script>
+
+import eventBus from "@/eventBus";
+
 export default {
   name: "NoteInput",
   data() {
@@ -11,9 +14,12 @@ export default {
     }
   },
   methods: {
-    addNote() {
+    pushNote() {
       console.log(`You submit a new note ${this.inputData}`)
-      // TODO Add to list
+      eventBus.emit('enter-note-input', {
+        name: this.inputData,
+        createdAt: new Date().toLocaleTimeString()
+      })
       this.inputData = null
     }
   }
