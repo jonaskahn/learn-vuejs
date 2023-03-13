@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import {store} from "@/store";
 export default {
   name: "NoteInput",
   data() {
@@ -14,10 +13,7 @@ export default {
   methods: {
     pushNote() {
       console.log(`You submit a new note ${this.inputData}`)
-      store.addNote({
-          name: this.inputData,
-          time: new Date().toLocaleTimeString()
-      })
+      this.$store.dispatch('addNote', this.inputData)
       this.inputData = null
     }
   }

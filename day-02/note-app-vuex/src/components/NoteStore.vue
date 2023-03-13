@@ -26,7 +26,7 @@
             </div>
 
           </li>
-          <li v-for="item in state.savedNotes" :key="item.id">
+          <li v-for="item in sortedNotes" :key="item.id">
             <div class="columns">
               <div class="column">
                 {{ item.id }}
@@ -50,13 +50,17 @@
 </template>
 
 <script>
-import { store } from "@/store";
 
 export default {
   name: "NoteStore",
   data() {
     return {
-      state: store.sharedState,
+      savedNotes: this.$store.state.savedNotes
+    }
+  },
+  computed: {
+    sortedNotes() {
+      return this.$store.getters.getNotes
     }
   },
   created() {
