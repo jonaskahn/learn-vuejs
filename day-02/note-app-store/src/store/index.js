@@ -1,0 +1,1 @@
+<li v-for="item in sortedNotes" : key="item.id">
