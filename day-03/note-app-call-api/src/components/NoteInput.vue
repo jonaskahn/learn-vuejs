@@ -24,6 +24,7 @@ export default {
            token: `${localStorage.getItem("token")}`
          }
        })
+       await this.$store.dispatch('loadNotes')
        alert(res.data)
      }catch (e) {
         alert(e.response.data)

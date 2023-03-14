@@ -66,25 +66,7 @@ export default {
     }
   },
   async created() {
-    const noteResponse = await http.get("/note/list")
-    const data = noteResponse.data
-    /**
-     * [
-     *     {
-     *         "id": 1,
-     *         "name": "test",
-     *         "createdAt": "01/02"
-     *     },
-     *     {
-     *         "id": 2,
-     *         "name": "test",
-     *         "createdAt": "01/02"
-     *     }
-     * ]
-     */
-    data.forEach(note => {
-      this.$store.dispatch('addNote', note)
-    })
+    await this.$store.dispatch('loadNotes')
   },
   methods: {
     deleteNote(id) {

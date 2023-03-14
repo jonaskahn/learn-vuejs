@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import Vue from "vue";
+import http from "@/service";
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -18,6 +19,14 @@ const store = new Vuex.Store({
   actions: {
     addNote(context, payload) {
       context.commit('ADD_NOTE', payload)
+    },
+    async loadNotes(context) {
+      const noteResponse = await http.get("/note/list")
+      const data = noteResponse.data
+      data.forEach(note => {
+        context.commit('ADD_NOTE', note)
+      })
+      return Promise.resolve()
     }
   },
   getters: {
