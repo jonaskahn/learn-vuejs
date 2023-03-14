@@ -23,7 +23,8 @@ export default {
   components: {NoteStore, NoteInput, NoteIntro},
   methods: {
     async logout() {
-
+      localStorage.removeItem("token")
+      await this.$router.go(this.$route.path)
     }
   }
 }

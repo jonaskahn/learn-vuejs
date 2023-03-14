@@ -26,7 +26,7 @@
             </div>
 
           </li>
-          <li v-for="item in sortedNotes" :key="item.id">
+          <li v-for="item in getNotes" :key="item.id">
             <div class="columns">
               <div class="column">
                 {{ item.id }}
@@ -50,8 +50,7 @@
 </template>
 
 <script>
-
-import http from "@/service";
+import {mapGetters} from "vuex";
 
 export default {
   name: "NoteStore",
@@ -61,9 +60,9 @@ export default {
     }
   },
   computed: {
-    sortedNotes() {
-      return this.$store.getters.getNotes
-    }
+    ...mapGetters([
+        'getNotes'
+    ])
   },
   async created() {
     await this.$store.dispatch('loadNotes')

@@ -18,7 +18,20 @@ const store = new Vuex.Store({
     DELETE_NOTE(state, payload) {
       //
       state.savedNotes
+    },
+    LOAD_NOTES(state, payload) {
+      state.savedNotes = []
+      payload.forEach(note => {
+        state.savedNotes.push(
+            {
+              name: note.name,
+              time: note.createdAt,
+              id: note.id
+            }
+        )
+      })
     }
+
   },
   actions: {
     addNote(context, payload) {
@@ -27,9 +40,7 @@ const store = new Vuex.Store({
     async loadNotes(context) {
       const noteResponse = await http.get("/note/list")
       const data = noteResponse.data
-      data.forEach(note => {
-        context.commit('ADD_NOTE', note)
-      })
+      context.commit('LOAD_NOTES', data)
       return Promise.resolve()
     },
   },
