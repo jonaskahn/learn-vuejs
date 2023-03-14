@@ -51,6 +51,8 @@
 
 <script>
 
+import http from "@/service";
+
 export default {
   name: "NoteStore",
   data() {
@@ -63,7 +65,26 @@ export default {
       return this.$store.getters.getNotes
     }
   },
-  created() {
+  async created() {
+    const noteResponse = await http.get("/note/list")
+    const data = noteResponse.data
+    /**
+     * [
+     *     {
+     *         "id": 1,
+     *         "name": "test",
+     *         "createdAt": "01/02"
+     *     },
+     *     {
+     *         "id": 2,
+     *         "name": "test",
+     *         "createdAt": "01/02"
+     *     }
+     * ]
+     */
+    data.forEach(note => {
+      //TODO dispatch data to store
+    })
   },
   methods: {
     deleteNote(id) {
