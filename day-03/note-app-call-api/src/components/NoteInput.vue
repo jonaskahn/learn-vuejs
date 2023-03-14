@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import http from "@/service";
+
 export default {
   name: "NoteInput",
   data() {
@@ -11,9 +13,12 @@ export default {
     }
   },
   methods: {
-    pushNote() {
+    async pushNote() {
       console.log(`You submit a new note ${this.inputData}`)
-      this.$store.dispatch('addNote', this.inputData)
+      const res = await http.post("/note/add", {
+        name: this.inputData,
+        createdAt: new Date().toLocaleTimeString()
+      })
       this.inputData = null
     }
   }

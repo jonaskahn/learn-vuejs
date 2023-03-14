@@ -19,6 +19,7 @@
 import NoteIntro from "@/components/NoteIntro.vue";
 import NoteInput from "@/components/NoteInput.vue";
 import NoteStore from "@/components/NoteStore.vue";
+import http from "@/service";
 
 export default {
   name: 'App',
@@ -27,6 +28,10 @@ export default {
     NoteInput,
     NoteIntro
   },
+  async created() {
+    const res = await http.get("/login")
+    localStorage.setItem("token", res.data)
+  }
 
 }
 </script>

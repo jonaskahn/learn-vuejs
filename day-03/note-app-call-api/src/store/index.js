@@ -9,9 +9,9 @@ const store = new Vuex.Store({
   mutations: {
     ADD_NOTE (state, payload) {
       state.savedNotes.push({
-        name: payload,
-        time: new Date().toLocaleTimeString(),
-        id:  0 // TODO
+        name: payload.name,
+        time: payload.createdAt,
+        id: payload.id
       })
     },
   },

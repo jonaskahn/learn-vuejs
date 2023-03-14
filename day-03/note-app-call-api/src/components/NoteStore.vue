@@ -83,7 +83,7 @@ export default {
      * ]
      */
     data.forEach(note => {
-      //TODO dispatch data to store
+      this.$store.dispatch('addNote', note)
     })
   },
   methods: {
