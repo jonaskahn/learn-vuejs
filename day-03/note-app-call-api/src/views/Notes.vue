@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <button class="button is-danger  is-light">Logout</button>
     <section class="section">
       <div class="title">
         <note-intro></note-intro>
