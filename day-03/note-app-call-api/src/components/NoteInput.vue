@@ -15,10 +15,19 @@ export default {
   methods: {
     async pushNote() {
       console.log(`You submit a new note ${this.inputData}`)
-      const res = await http.post("/note/add", {
-        name: this.inputData,
-        createdAt: new Date().toLocaleTimeString()
-      })
+     try {
+       const res = await http.post("/note/add", {
+         name: this.inputData,
+         createdAt: new Date().toLocaleTimeString()
+       }, {
+         headers: {
+           token: `${localStorage.getItem("token")}`
+         }
+       })
+       alert(res.data)
+     }catch (e) {
+        alert(e.response.data)
+     }
       this.inputData = null
     }
   }
