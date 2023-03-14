@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <button class="button is-danger  is-light">Logout</button>
+    <button class="button is-danger is-light" @click="logout">Logout</button>
     <section class="section">
       <div class="title">
         <note-intro></note-intro>
@@ -20,7 +20,12 @@ import NoteStore from "@/components/NoteStore.vue";
 
 export default {
   name: "Notes",
-  components: {NoteStore, NoteInput, NoteIntro}
+  components: {NoteStore, NoteInput, NoteIntro},
+  methods: {
+    async logout() {
+
+    }
+  }
 }
 </script>
 
