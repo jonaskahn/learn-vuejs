@@ -15,6 +15,10 @@ const store = new Vuex.Store({
         id: payload.id
       })
     },
+    DELETE_NOTE(state, payload) {
+      //
+      state.savedNotes
+    }
   },
   actions: {
     addNote(context, payload) {
@@ -27,7 +31,7 @@ const store = new Vuex.Store({
         context.commit('ADD_NOTE', note)
       })
       return Promise.resolve()
-    }
+    },
   },
   getters: {
     getNotes(state) {
