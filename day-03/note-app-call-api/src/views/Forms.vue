@@ -7,16 +7,16 @@
           <div class="control has-icons-left has-icons-right">
             <input
                 class="input"
-                :class="[emailValid ? 'is-success' : 'is-danger']"
                 placeholder="Enter your email"
-                type="text"
-                v-model="email"
+                type="email"
+                ref="email"
+                @keyup="onEmailChange"
             />
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
             <span class="icon is-small is-right">
-              <i v-if="emailValid" class="fas fa-check"></i>
+              <i v-if="validationErrors.email" class="fas fa-check"></i>
               <i v-else class="fas fa-exclamation-triangle"></i>
             </span>
           </div>
@@ -26,21 +26,21 @@
 
     <div class="columns">
       <div class="column">
-        <div class="field has-text-left	">
+        <div class="field has-text-left">
           <label class="label">Password</label>
           <div class="control has-icons-left has-icons-right">
             <input
                 class="input"
-                :class="[passwordValid ? 'is-success' : 'is-danger']"
                 placeholder="Enter your password"
                 type="password"
-                v-model="password"
+                ref="password"
+                @keyup="onPasswordChange"
             />
             <span class="icon is-small is-left">
               <i class="fas fa-key"></i>
             </span>
             <span class="icon is-small is-right">
-               <i v-if="passwordValid" class="fas fa-check"></i>
+               <i v-if="validationErrors.password" class="fas fa-check"></i>
               <i v-else class="fas fa-exclamation-triangle"></i>
             </span>
           </div>
@@ -65,26 +65,38 @@ export default {
   name: "Forms",
   data() {
     return {
-      email: "demo@example.com",
-      password: "demopassword",
-    }
-  },
-  computed: {
-    emailValid() {
-      return /^[^@]+@\w+(\.\w+)+\w$/.test(this.email);
-    },
-    passwordValid() {
-      return this.password.length > 10;
+      validationErrors: {
+        email: false,
+        password: false
+      }
     }
   },
   methods: {
     logout,
     submit() {
-      if(!this.emailValid) {
-        alert(" Email is not valid ")
-
-      } else if (!this.passwordValid) {
-        alert( " Password is not valid")
+      this.onPasswordChange()
+      this.onEmailChange()
+    },
+    onEmailChange() {
+      const emailRefs = this.$refs.email
+      this.validationErrors.email = /^[^@]+@\w+(\.\w+)+\w$/.test(emailRefs.value)
+      if(this.validationErrors.email) {
+        emailRefs.classList.remove('is-danger')
+        emailRefs.classList.add('is-success')
+      } else {
+        emailRefs.focus();
+        emailRefs.classList.add('is-danger')
+      }
+    },
+    onPasswordChange() {
+      const passwordRefs = this.$refs.password
+      this.validationErrors.password = passwordRefs.value.length > 10
+      if(this.validationErrors.password) {
+        passwordRefs.classList.remove('is-danger')
+        passwordRefs.classList.add('is-success')
+      } else {
+        passwordRefs.focus();
+        passwordRefs.classList.add('is-danger')
       }
     }
   },
