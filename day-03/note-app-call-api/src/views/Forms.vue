@@ -1,34 +1,25 @@
 <template>
-  <form class="container is-max-desktop">
+  <form class="container is-max-desktop" @submit.prevent="submit">
     <div class="columns">
       <div class="column">
         <div class="field has-text-left	">
-          <label class="label">Name</label>
-          <div class="control">
-            <input class="input" placeholder="Text input" type="text" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="columns">
-      <div class="column">
-        <div class="field has-text-left	">
-          <label class="label">Username</label>
+          <label class="label">Email</label>
           <div class="control has-icons-left has-icons-right">
             <input
-                class="input is-success"
-                placeholder="Text input"
+                class="input"
+                :class="[emailValid ? 'is-success' : 'is-danger']"
+                placeholder="Enter your email"
                 type="text"
-                value="bulma"
+                v-model="email"
             />
             <span class="icon is-small is-left">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-envelope"></i>
             </span>
             <span class="icon is-small is-right">
-              <i class="fas fa-check"></i>
+              <i v-if="emailValid" class="fas fa-check"></i>
+              <i v-else class="fas fa-exclamation-triangle"></i>
             </span>
           </div>
-          <p class="help is-success">This username is available</p>
         </div>
       </div>
     </div>
@@ -36,22 +27,23 @@
     <div class="columns">
       <div class="column">
         <div class="field has-text-left	">
-          <label class="label">Email</label>
+          <label class="label">Password</label>
           <div class="control has-icons-left has-icons-right">
             <input
-                class="input is-danger"
-                placeholder="Email input"
-                type="email"
-                value="hello@"
+                class="input"
+                :class="[passwordValid ? 'is-success' : 'is-danger']"
+                placeholder="Enter your password"
+                type="password"
+                v-model="password"
             />
             <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
+              <i class="fas fa-key"></i>
             </span>
             <span class="icon is-small is-right">
-              <i class="fas fa-exclamation-triangle"></i>
+               <i v-if="passwordValid" class="fas fa-check"></i>
+              <i v-else class="fas fa-exclamation-triangle"></i>
             </span>
           </div>
-          <p class="help is-danger">This email is invalid</p>
         </div>
       </div>
     </div>
@@ -71,8 +63,30 @@ import logout from "@/service/logout";
 
 export default {
   name: "Forms",
+  data() {
+    return {
+      email: "demo@example.com",
+      password: "demopassword",
+    }
+  },
+  computed: {
+    emailValid() {
+      return /^[^@]+@\w+(\.\w+)+\w$/.test(this.email);
+    },
+    passwordValid() {
+      return this.password.length > 10;
+    }
+  },
   methods: {
-    logout
+    logout,
+    submit() {
+      if(!this.emailValid) {
+        alert(" Email is not valid ")
+
+      } else if (!this.passwordValid) {
+        alert( " Password is not valid")
+      }
+    }
   },
 };
 </script>
