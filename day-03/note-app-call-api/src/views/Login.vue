@@ -15,7 +15,7 @@ export default {
         const res = await http.get("/login")
         localStorage.setItem("token", res.data)
         alert("Login success")
-        await this.$router.push("/")
+        await this.$router.go(-1)
       }catch (e) {
         alert(e)
       }

@@ -17,6 +17,11 @@ const router = new VueRouter({
             path: '/login',
             name: "login",
             component: () =>  import('@/views/Login.vue')
+        },
+        {
+            path: '/form',
+            name: "form",
+            component: () =>  import('@/views/Forms.vue')
         }
     ]
 })
